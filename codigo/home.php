@@ -15,6 +15,9 @@
             <a href="listarClientes.php">Lista de clientes cadastrados</a>
         </li>
         <li>
+            <a href="listarVendas.php">listar de vendar</a>
+        </li>
+        <li>
             <a href="formProduto.php">Cadastrar novo produto</a>
         </li>
         <li>

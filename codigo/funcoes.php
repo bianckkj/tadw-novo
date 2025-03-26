@@ -104,9 +104,29 @@ function editarProduto($conexao, $nome, $tipo, $preco_compra, $preco_venda, $mar
     return $funcionou;
 };
 
-function salvarUruario () {};
+function salvarUsuario ($conexao, $nome, $email, $senha) {
+    $sql = "INSERT INTO tb_usuario (nome, email, senha) VALUES (?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sss', $nome, $email, $senha);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
 
-function salvarVenda () {};
+function salvarVenda ($conexao, $nome, $email, $senha) {
+    $sql = "INSERT INTO tb_usuario (nome, email, senha) VALUES (?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sss', $nome, $email, $senha);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
 
 function pesquisarCliente () {};
 
