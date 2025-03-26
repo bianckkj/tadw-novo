@@ -79,4 +79,39 @@ function salvarProdutos($conexao, $nome, $tipo, $preco_compra, $preco_venda, $ma
     mysqli_stmt_close($comando);
     return $funcionou;
 };
+
+function editarCliente($conexao, $nome, $cpf, $endereco, $idcliente) {
+    $sql = "UPDATE tb_cliente SET nome=?, cpf=?, endereco=? WHERE idcliente=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $cpf, $endereco, $idcliente);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+
+function editarProduto($conexao, $nome, $tipo, $preco_compra, $preco_venda, $margem_lucro, $quantidade, $idproduto) {
+    $sql = "UPDATE tb_produto SET nome=?, tipo=?, preco_compra=?, preco_venda=?, margem_lucro=?, quantidade=? WHERE idproduto=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssddddi', $nome, $tipo, $preco_compra, $preco_venda, $margem_lucro, $quantidade, $idproduto);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+
+function salvarUruario () {};
+
+function salvarVenda () {};
+
+function pesquisarCliente () {};
+
+function pesquisarProduto () {};
+
+function listarVendas () {};
+
 ?>
