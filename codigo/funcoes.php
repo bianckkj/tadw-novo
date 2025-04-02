@@ -34,10 +34,14 @@ function salvarCliente($conexao, $nome, $cpf, $endereco) {
     
     mysqli_stmt_bind_param($comando, 'sss', $nome, $cpf, $endereco);
     
-    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_execute($comando);
     
+    // retorna o valor do id que acabou de ser inserido
+    $idcliente = mysqli_stmt_insert_id($comando);
+
     mysqli_stmt_close($comando);
-    return $funcionou;
+
+    return $idcliente;
 };
 
 function deletarProduto($conexao, $idproduto) {
@@ -128,10 +132,38 @@ function salvarVenda ($conexao, $nome, $email, $senha) {
     return $funcionou;
 };
 
-function pesquisarCliente () {};
+function pesquisarCliente($conexao, $idcliente) {
+    $sql = "SELECT * FROM tb_cliente WHERE idcliente = ?";
+    $comando = mysqli_prepare($conexao, $sql);
 
-function pesquisarProduto () {};
+    mysqli_stmt_bind_param($comando, 'i', $idcliente);
 
-function listarVendas () {};
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $cliente = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $cliente;
+};
+
+function pesquisarProduto($conexao, $idproduto) {
+    $sql = "SELECT * FROM tb_produto WHERE idproduto = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idproduto);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $produto = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $produto;
+};
+
+//mostrar o nome do cliente ao invés do id
+//mostrar o nome do produto ao invés do id
+function listarVendas() {};
 
 ?>
