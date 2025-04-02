@@ -120,15 +120,15 @@ function salvarUsuario ($conexao, $nome, $email, $senha) {
     return $funcionou;
 };
 
-function salvarVenda ($conexao, $nome, $email, $senha) {
-    $sql = "INSERT INTO tb_usuario (nome, email, senha) VALUES (?, ?, ?)";
+function salvarVenda($conexao, $idcliente, $idproduto, $valor_total, $data) {
+    $sql = "INSERT INTO tb_venda (idcliente, idproduto, valor_total, data) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
-    
-    mysqli_stmt_bind_param($comando, 'sss', $nome, $email, $senha);
-    
+
+    mysqli_stmt_bind_param($comando, 'iids', $idcliente, $idproduto, $valor_total, $data);
+
     $funcionou = mysqli_stmt_execute($comando);
-    
     mysqli_stmt_close($comando);
+    
     return $funcionou;
 };
 
@@ -164,6 +164,22 @@ function pesquisarProduto($conexao, $idproduto) {
 
 //mostrar o nome do cliente ao invés do id
 //mostrar o nome do produto ao invés do id
-function listarVendas() {};
+
+
+function listarVendas($conexao) {
+    $sql = "SELECT * FROM tb_venda";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_vendas = [];
+    while ($venda = mysqli_fetch_assoc($resultado)) {
+        $lista_vendas[] = $venda;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_vendas;
+};
 
 ?>
