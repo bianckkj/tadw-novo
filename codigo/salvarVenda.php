@@ -17,7 +17,7 @@ require_once "funcoes.php";
 
     <form action="">
         
-        <select id="" name="">
+        <select id="cliente" name="cliente">
             <option>nome clientes</option>
         </select> <br><br>
 
@@ -35,8 +35,8 @@ require_once "funcoes.php";
             $nome = $produto['nome'];
             $id = $produto['idproduto'];
 
-            echo "<input type='checkbox' name='produto[]' value='$id'> $nome";
-            echo "<input type='text' name='?'><br>";
+            echo "<input type='checkbox' value'$idproduto' name='produto[]' value='$id'> $nome";
+            echo "<input type='text' name='???'><br>";
         }
 
         ?>
